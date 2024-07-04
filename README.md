@@ -65,6 +65,8 @@ Le relazioni tra le entità sono definite come segue:
 
 #### Processo di Deploy Continuo
 
+![Deploy Graph](deploy-graph.png)
+
 L'immagine seguente illustra il flusso di deploy continuo per un'applicazione NestJS utilizzando servizi AWS e GitHub. Ecco una descrizione dettagliata di ogni fase del processo:
 
 **Inizio (Start)**
