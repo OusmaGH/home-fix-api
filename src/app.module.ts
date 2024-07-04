@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { IsUniqueConstraint } from './common/validator/isUniqueConstraint';
+import { RequestsActionModule } from './requests-action/requests-action.module';
+import { TechniciansModule } from './technicians/technicians.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { IsUniqueConstraint } from './common/validator/isUniqueConstraint';
         configService.get('typeorm'),
     }),
     UsersModule,
+    RequestsActionModule,
+    TechniciansModule,
   ],
   controllers: [AppController],
   providers: [AppService, IsUniqueConstraint],

@@ -7,8 +7,10 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { AbstractEntity } from '../../common/entities/abstract.entity';
+import { RequestsAction } from 'src/requests-action/entities/requests-action.entity';
 
 @Entity({ name: 'user' })
 export class User extends AbstractEntity<User> {
@@ -53,6 +55,9 @@ export class User extends AbstractEntity<User> {
 
   @DeleteDateColumn({ type: 'datetime', nullable: true })
   deleted_at: Date;
+
+  @OneToMany(() => RequestsAction, (request) => request.user)
+  requests: RequestsAction[];
 
   @AfterInsert()
   logInsert() {
