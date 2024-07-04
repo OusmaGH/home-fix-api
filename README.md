@@ -93,8 +93,6 @@ Il processo di deploy si conclude con il codice dell'applicazione in esecuzione 
 
 ---
 
----
-
 ### Conclusione
 
 In questa documentazione ho fornito una panoramica del sistema di gestione delle richieste di intervento tecnico, sviluppato utilizzando NestJS e TypeORM. Ho descritto le entità principali del sistema - User, Technician, e RequestsAction - e le loro relazioni, illustrando come interagiscono tra loro nel database relazionale configurato su Amazon RDS. Ho anche delineato le chiamate API necessarie per gestire le entità, comprese le operazioni di creazione, lettura, aggiornamento e cancellazione (CRUD).
