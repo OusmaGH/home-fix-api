@@ -5,6 +5,11 @@ import { ValidationPipe } from '@nestjs/common';
 import { useContainer } from 'class-validator';
 dotenv.config();
 
+import serverlessExpress from '@vendia/serverless-express';
+import { Callback, Context, Handler } from 'aws-lambda';
+
+let server: Handler;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
@@ -18,11 +23,17 @@ async function bootstrap() {
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-  const port: number = parseInt(process.env.PORT, 10);
-  await app.listen(port, () => {
-    console.log(
-      ` 🚀  Running API in ${process.env.NODE_ENV} MODE on Port : ${port}`,
-    );
-  });
+  await app.init();
+
+  const expressApp = app.getHttpAdapter().getInstance();
+  return serverlessExpress({ app: expressApp });
 }
-bootstrap();
+
+export const handler: Handler = async (
+  event: any,
+  context: Context,
+  callback: Callback,
+) => {
+  server = server ?? (await bootstrap());
+  return server(event, context, callback);
+};
