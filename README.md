@@ -100,3 +100,5 @@ In questa documentazione ho fornito una panoramica del sistema di gestione delle
 Inoltre, ho dettagliato il processo di deploy continuo, che sfrutta servizi AWS come CodePipeline, CodeBuild e Elastic Beanstalk per garantire che ogni aggiornamento del codice sia automaticamente testato e distribuito, assicurando così un'integrazione e distribuzione continua e affidabile.
 
 Questa documentazione funge da guida per comprendere l'architettura del sistema, le API disponibili e il flusso di lavoro del deploy continuo, facilitando il contributo degli sviluppatori al progetto e mantenendo il sistema robusto e scalabile.
+
+docker run -p 3000:3000 home-fix-api
