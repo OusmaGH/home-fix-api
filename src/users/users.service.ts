@@ -10,7 +10,7 @@ import { PasswordMatchDto } from './dto/password-match.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import * as bcryptjs from 'bcryptjs';
+import * as bcrypt from 'bcrypt';
 import { GoodResDto } from '../common/dto/good-res.dto';
 import { EmailManagementFactory } from 'src/common/services/email/email-management.factory';
 import { v4 as uuidv4 } from 'uuid';
@@ -31,7 +31,7 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<GoodResDto> {
-    const passwordHash: string = await bcryptjs.hash(
+    const passwordHash: string = await bcrypt.hash(
       createUserDto.password,
       parseInt(process.env.SALT_ROUNDS),
     );
@@ -102,7 +102,7 @@ export class UsersService {
       );
     }
 
-    const isPasswordValid = await bcryptjs.compare(
+    const isPasswordValid = await bcrypt.compare(
       body.password,
       user.password,
     );
@@ -232,7 +232,7 @@ export class UsersService {
     }
 
     if (passwordMatchDto.password === passwordMatchDto.passwordConfirm) {
-      const hashedPassword: string = await bcryptjs.hash(
+      const hashedPassword: string = await bcrypt.hash(
         passwordMatchDto.password,
         parseInt(process.env.SALT_ROUNDS),
       );
@@ -252,7 +252,7 @@ export class UsersService {
   async changePassword(userId: number, changePassword: ChangePasswordDto) {
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
-    const isOldPasswordValid = await bcryptjs.compare(
+    const isOldPasswordValid = await bcrypt.compare(
       changePassword.oldPassword,
       user.password,
     );
@@ -376,6 +376,6 @@ export class UsersService {
     password: string,
     rounds = parseInt(process.env.SALT_ROUNDS, 10),
   ): Promise<string> {
-    return await bcryptjs.hash(password, rounds);
+    return await bcrypt.hash(password, rounds);
   }
 }
